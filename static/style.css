@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .box {
+    height: 75px;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+form#team_selection label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+#button {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+}
+
+#button:hover {
+    background-color: #003cff;
+}
+
+#stats_table {
+    margin-top: 2rem;
+    padding: 1rem;
+}
+

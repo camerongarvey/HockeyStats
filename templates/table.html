@@ -6,8 +6,10 @@
           href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+<div id="stats_table">
     <table id="csvTable" class="display">
         <thead>
             <tr>
@@ -26,18 +28,21 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
 
     <script>
         $(document).ready(function () {
             $('#csvTable').DataTable({
-                "order": [],
-                "pageLength": 25  // Change this to show 25 rows by default
+                "pageLength": 25,  // Change this to show 25 rows by default
+                "order": [[1, 'desc']]
             });
         });
     </script>
 
-    <form action="{{ url_for('index') }}">
-        <button type="submit">Back</button>
-    </form>
+    <div>
+        <form action="{{ url_for('index') }}">
+            <button id="button" type="submit">Back</button>
+        </form>
+    </div>
 </body>
 </html>
