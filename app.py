@@ -43,8 +43,6 @@ def index():
     )
 
 
-
-
 @app.route('/stats')
 def stats():
     df = pd.read_csv('data.csv')
