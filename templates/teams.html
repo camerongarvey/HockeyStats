@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/style.css">
+
+    <script>
+    function confirmSubmission(event) {
+      if (!confirm(`Are you sure you want to delete this item"?`)) {
+        event.preventDefault();
+      }
+    }
+  </script>
+
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main>
+
+    <div class="data-table">
+        <table>
+            {% for team in downloaded_teams %}
+                <tr>
+
+                    <td>{{ team }}</td>
+
+
+                    <td>
+                        <form action="/display-stats" method="post" style="display:inline;">
+                            <input type="hidden" name="team_name" value="{{ team }}">
+                            <button id="button" type="submit">Display</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/update-data" method="post" style="display:inline;">
+                            <input type="hidden" name="team_name" value="{{ team }}">
+                            <button id="button" type="submit">Update</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form id="delete-form-1" onsubmit="confirmSubmission(event)" action="/delete-data" style="display:inline;" method="post">
+                            <input type="hidden" name="team_name" value="{{ team }}">
+                            <button id="remove-button" type="submit">Delete</button>
+                        </form>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </main>
+
+
+    <script>
+        fetch('/header')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+          });
+      </script>
+</body>
+</html>

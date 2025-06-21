@@ -148,7 +148,7 @@ def home_or_away(line, team) -> bool:
 
 
 def run(team):
-    path = "data"
+    path = "data/" + str(team)
     my_team = team
     files = os.listdir(path)
 

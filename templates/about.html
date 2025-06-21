@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main>
+         <p id="yoda-quote"> "Already know you that which you need." - Yoda</p>
+    </main>
+
+
+    <script>
+        fetch('/header')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+          });
+      </script>
+</body>
+</html>

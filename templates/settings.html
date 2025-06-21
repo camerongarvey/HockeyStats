@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+     <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main>
+        <div class="setting-option">
+            <p>The illusion of choice:</p>
+            <label class="switch">
+
+                <input type="checkbox" id="myToggle">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </main>
+
+
+    <script>
+    fetch('/header')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+      });
+
+    const toggle = document.getElementById('myToggle');
+
+    // Load initial state
+    fetch('/get_toggle')
+        .then(res => res.json())
+        .then(data => {
+            toggle.checked = data.enabled;
+        });
+
+    // Handle toggle change
+    toggle.addEventListener('change', () => {
+        fetch('/set_toggle', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ enabled: toggle.checked })
+        });
+    });
+</script>
+</body>
+</html>

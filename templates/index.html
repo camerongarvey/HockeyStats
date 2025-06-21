@@ -5,29 +5,40 @@
     <title>Stats Website</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
-<div class="container">
-    <div class="box">
-        <form method="post" id="team_selection">
-            <label for="year">Select year:</label>
-            <select id="year" name="year">
-                {% for sec in years %}
-                    <option value="{{ sec }}" {% if sec == selected_year %}selected{% endif %}>{{ sec }}</option>
-                {% endfor %}
-            </select>
+<body>
+    <div id="header-placeholder"></div>
 
-            <label for="team">Select team:</label>
-            <select id="team" name="team">
-                {% for team in teams %}
-                    <option value="{{ team }}" {% if team == selected_team %}selected{% endif %}>{{ team }}</option>
-                {% endfor %}
-            </select>
+    <div class="container">
+        <div class="box">
+            <form method="post" id="team_selection">
+                <label for="year">Select yer:</label>
+                <select id="year" name="year">
+                    {% for year in years %}
+                        <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
+                    {% endfor %}
+                </select>
 
-            <button id="button" type="submit">Go</button>
-        </form>
+                <label for="team">Select team:</label>
+                <select id="team" name="team">
+                    {% for team in teams %}
+                        <option value="{{ team }}" {% if team == selected_team %}selected{% endif %}>{{ team }}</option>
+                    {% endfor %}
+                </select>
+
+                <button id="button" type="submit">Go</button>
+            </form>
+        </div>
+        <div class="box">
+            <p>Made by Cameron Garvey - github.com/camerongarvey</p>
+        </div>
     </div>
-    <div class="box">
-        <p>Made by Cameron Garvey - github.com/camerongarvey</p>
-    </div>
-</div>
+
+    <script>
+        fetch('/header')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+          });
+      </script>
 </body>
 </html>

@@ -80,8 +80,8 @@ async def download_game_modals_optimized(url, output_folder='data'):
         await browser.close()
 
 
-def run(url):
-    output_folder = "data"
+def run(url, team):
+    output_folder = "data/" + str(team)
     os.makedirs(output_folder, exist_ok=True)
     for file in os.listdir(output_folder):
         os.remove(os.path.join(output_folder, file))
