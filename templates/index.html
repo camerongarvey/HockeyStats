@@ -11,18 +11,24 @@
     <div class="container">
         <div class="box">
             <form method="post" id="team_selection">
-                <label for="year">Select yer:</label>
+                <label for="year">Year:</label>
                 <select id="year" name="year">
+                    <option disabled selected>-- select year --</option>
                     {% for year in years %}
                         <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
                     {% endfor %}
                 </select>
 
-                <label for="team">Select team:</label>
+                <label for="association">Association:</label>
+                <select id="association" name="association">
+                    <option disabled selected>-- select association --</option>
+
+                </select>
+
+                <label for="team">Team:</label>
                 <select id="team" name="team">
-                    {% for team in teams %}
-                        <option value="{{ team }}" {% if team == selected_team %}selected{% endif %}>{{ team }}</option>
-                    {% endfor %}
+                    <option disabled selected>-- select team --</option>
+
                 </select>
 
                 <button id="button" type="submit">Go</button>
@@ -32,6 +38,54 @@
             <p>Made by Cameron Garvey - github.com/camerongarvey</p>
         </div>
     </div>
+
+
+    <script>
+        const yearSelect = document.getElementById('year');
+        const associationSelect = document.getElementById('association');
+        const teamSelect = document.getElementById('team');
+
+        yearSelect.addEventListener('change', () => {
+            const year = yearSelect.value;
+            fetch(`/get-associations?year=${encodeURIComponent(year)}`)
+                .then(res => res.json())
+                .then(associations => {
+                    associationSelect.innerHTML = '';
+                    associations.forEach(cat => {
+                        const option = document.createElement('option');
+                        option.value = cat;
+                        option.textContent = cat;
+                        associationSelect.appendChild(option);
+                    });
+                    if (associations.length > 0) {
+                        associationSelect.selectedIndex = 0;
+                        associationSelect.dispatchEvent(new Event('change'));
+                    }
+                    associationSelect.disabled = false;
+
+
+                });
+        });
+
+        associationSelect.addEventListener('change', () => {
+            const association = associationSelect.value;
+            const year = yearSelect.value;
+            fetch(`/get-teams?year=${encodeURIComponent(year)}&association=${encodeURIComponent(association)}`)
+                .then(res => res.json())
+                .then(teams => {
+                    teamSelect.innerHTML = '';
+                    teams.forEach(team => {
+                        const option = document.createElement('option');
+                        option.value = team;
+                        option.textContent = team;
+                        teamSelect.appendChild(option);
+                    });
+                    teamSelect.disabled = false;
+                });
+        });
+    </script>
+
+    
 
     <script>
         fetch('/header')

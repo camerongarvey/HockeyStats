@@ -7,7 +7,6 @@
 .box {
     height: 75px;
 
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,12 +77,6 @@ form#team_selection label {
     padding: 8px;
 }
 
-#yoda-quote {
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-}
-
 .switch {
   position: relative;
   display: inline-block;
@@ -135,3 +128,4 @@ input:checked + .slider:before {
     font-size: 32px;
 
 }
+

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Teams</title>
     <link rel="stylesheet" href="/static/style.css">
 
     <script>
@@ -19,13 +19,11 @@
     <main>
 
     <div class="data-table">
+    {%  if downloaded_teams %}
         <table>
             {% for team in downloaded_teams %}
                 <tr>
-
                     <td>{{ team }}</td>
-
-
                     <td>
                         <form action="/display-stats" method="post" style="display:inline;">
                             <input type="hidden" name="team_name" value="{{ team }}">
@@ -43,11 +41,15 @@
                             <input type="hidden" name="team_name" value="{{ team }}">
                             <button id="remove-button" type="submit">Delete</button>
                         </form>
-
                     </td>
                 </tr>
             {% endfor %}
         </table>
+    {% else %}
+        <div class="box">
+            <p>No teams have been downloaded yet.</p>
+        </div>
+    {% endif %}
     </div>
     </main>
 
