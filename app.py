@@ -56,6 +56,8 @@ def index():
 @app.route('/teams')
 def teams():
     parent_folder = 'data'
+    if not os.path.exists(parent_folder):
+        os.mkdir(parent_folder)
     downloaded_teams = [f for f in os.listdir(parent_folder)
                         if os.path.isdir(os.path.join(parent_folder, f))]
     downloaded_teams.sort()
