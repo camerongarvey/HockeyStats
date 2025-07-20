@@ -1,15 +1,13 @@
-A webapp that pulls stats for team from Hisport
+An unoffical webapp that pulls stats for team from Hisport and allows the tracking of stats for the Vancouver Island Amateur Hockey Association 
 
 To use:
 
-Step 1: Download this repository
+Step 1: Download and open this repository
 
-Step 2: Install project dependencies (if unsure run app.py and follow prompts in terminal)
+Step 2: Run the command "pip install -r requirements.txt"
 
-Step 3: Run app.py
+Step 3: Run the command "python3 -m flask run"
 
-Step 4: Select the year and team then click "Go"
+Step 4: If a webpage does not automatically open click on the link in the terminal output
 
-Step 5: Wait... wait... wait... (I'm working on speeding it up but I promise it's loading and not just frozen)
-
-To modify the which teams are available go to "data_source.py" and either replace or extend the directory. 
+To modify the which teams are available go to "data_sources.py" and add teams following the style guide
