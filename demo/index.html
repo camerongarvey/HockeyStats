@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stats Website Demo</title>
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<div class="container">
+  <div class="box">
+    <form method="post" id="team_selection">
+      <label for="year">Year:</label>
+      <select id="year" name="year">
+        <option disabled selected>-- select year --</option>
+        <option>2025</option>
+      </select>
+
+      <label for="association">Association:</label>
+      <select id="association" name="association">
+        <option disabled selected>-- select association --</option>
+        <option>PENINSULA</option>
+        <option>VICTORIA</option>
+
+
+      </select>
+
+      <label for="team">Team:</label>
+      <select id="team" name="team">
+        <option disabled selected>-- select team --</option>
+        <option>U18 C1</option>
+        <option>U18 C2</option>
+
+      </select>
+
+
+    </form>
+    <button id="button" onclick="window.location.href='teams.html'">Go</button>
+  </div>
+  <div class="box">
+    <p>More teams and live refresh is available in the free full version</p>
+  </div>
+  <div class="box">
+    <p>Demo Version made by Cameron Garvey - github.com/camerongarvey</p>
+  </div>
+</div>
+
+<script>
+  fetch('header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header-placeholder').innerHTML = data;
+    });
+</script>
+
+<script>
+  window.onload = function() {
+    // Check if the user has already visited
+    if (!localStorage.getItem('hasVisited')) {
+      alert('Welcome to the demo version of my project! To download the full version visit my GitHub!');
+      localStorage.setItem('hasVisited', 'true');
+    }
+  };
+</script>
+</body>
+</html>

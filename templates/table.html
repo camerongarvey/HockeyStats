@@ -15,7 +15,7 @@
             <tr>
                 {% for col in columns %}
                 <th>{{ col }}</th>
-                {% endfor %}
+                {% endfr %}
             </tr>
         </thead>
         <tbody>
@@ -33,7 +33,7 @@
     <script>
         $(document).ready(function () {
             $('#csvTable').DataTable({
-                "pageLength": 25,  // Change this to show 25 rows by default
+                "pageLength": 25,
                 "order": [[1, 'desc']]
             });
         });

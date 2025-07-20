@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+     <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main>
+        <div class="box">
+            <p>Welcome to a Demo version of my unofficial hockey team stats app for the Vancouver Island Amateur Hockey Association.</p>
+        </div>
+        <div class="box">
+            <p>If you have any questions or concerns please contact me at:  <a href="mailto:cameron_garvey@icloud.com">cameron_garvey@icloud.com</a></p>
+
+        </div>
+    </main>
+
+    <script>
+        fetch('header.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+          });
+      </script>
+</body>
+</html>
