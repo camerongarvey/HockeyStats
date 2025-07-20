@@ -9,13 +9,12 @@ import process_data as processor
 import pandas as pd
 
 app = Flask(__name__)
-loaded = None
 toggle_state = {'enabled': False}  # Global dictionary
 PATH = "data/"
 
 data_map = {}
 
-for item in source:
+for item in source: #I don't remember what this does, but it breaks when I touch it
     data_map[item[0]] = item[1]
 
 
@@ -32,18 +31,9 @@ def index():
         if not (selected_year and selected_association and selected_team and selected_year in years):
             return redirect(url_for('index'))
 
-        print(f"User selected year: {selected_year}")
-        print(f"User selected association: {selected_association}")
-        print(f"User selected team: {selected_team}")
-
-        global loaded
-
-        if loaded != selected_association + ' ' + selected_association:
-
-            bot.run(data_map[selected_year][selected_association][selected_team],
+        bot.run(data_map[selected_year][selected_association][selected_team],
                     selected_association + ' ' + selected_team)
-            processor.run(selected_association + ' ' + selected_team)
-            loaded = selected_association + ' ' + selected_team
+        processor.run(selected_association + ' ' + selected_team)
 
         return redirect("/stats")
 
@@ -114,10 +104,22 @@ def display_stats():
 def update_data():
     team_name = request.form.get('team_name')
     if team_name:
-        pass
-        #bot.run(source[team_name], team_name)
+        selected_year = "2025"
+        selected_association, selected_team = get_assocation_and_team(team_name)
+
+        bot.run(data_map[selected_year][selected_association][selected_team],
+               selected_association + ' ' + selected_team)
+
     return redirect(url_for('teams'))
 
+def get_assocation_and_team(s):
+    chunks = s.split()
+    for i, chunk in enumerate(chunks):
+        if any(char.isdigit() for char in chunk):  # Detects number in chunk
+            asscoiation = ' '.join(chunks[:i])
+            team = ' '.join(chunks[i:])
+            return asscoiation, team
+    return s, ''  # If no number is found, return original and empty string
 
 @app.route('/delete-data', methods=['POST', 'GET'])  #Delete Button
 def delete_data():
@@ -151,7 +153,6 @@ def get_teams():
     year = request.args.get('year')
     association = request.args.get('association')
     t = []
-    print(data_map)
     for i in data_map.get(year).get(association).keys():
         t.append(i)
     t.sort()
